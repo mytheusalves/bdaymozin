@@ -1,0 +1,161 @@
+<!DOCTYPE html><html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parabéns, mô!</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom right, #ff9a9e, #fad0c4);
+            color: #fff;
+            text-align: center;
+            overflow-x: hidden;
+        }
+        .container {
+            padding: 20px 20px;
+        }
+        h1 {
+            font-size: 2.2em;
+            margin-bottom: 5px;
+        }
+        .highlight {
+            font-size: 1.2em;
+            margin: 30px auto;
+            background: rgba(255, 255, 255, 0.19);
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 600px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+            line-height: 1.4em;
+        }
+        .slideshow {
+            margin: 30px 0;
+        }
+        .slideshow img {
+            width: 90%;
+            max-width: 350px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            margin: 20px 0;
+            object-fit: contain;
+            max-height: 400px;
+        }
+        .slideshow-buttons {
+            margin-top: 10px;
+        }
+        .slideshow-buttons button {
+            background: #fff;
+            color: #ff4d6d;
+            border: none;
+            padding: 10px 15px;
+            margin: 0 5px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: background 0.3s;
+        }
+        .slideshow-buttons button:hover {
+            background: #ffe0e6;
+        }
+        .hearts, .balloons {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+        .heart {
+            position: absolute;
+            color: #ff4d6d;
+            font-size: 24px;
+            animation: float 6s infinite ease-in;
+        }
+        .balloon {
+            position: absolute;
+            font-size: 28px;
+            animation: float 6s infinite ease-in;
+            filter: drop-shadow(0 0 5px rgba(255,255,255,0.7));
+        }
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(1); opacity: 1; }
+            100% { transform: translateY(-10vh) scale(0.5); opacity: 0; }
+        }
+        footer {
+            margin-top: 40px;
+            font-size: 0.9em;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border-top: 1px solid rgba(255,255,255,0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Happy birthday to the best girlfriend in the world!!!</h1><p class="highlight">
+        Feliz aniversário, mô! <br> Que o seu dia seja tão lindo quanto o seu sorriso e repleto de coisas boas, presentes hehe e muito amor! Mesmo longe, meu coração tá aí com você. Parabéns pelo seu dia. <br> Te amo!
+    </p><div class="slideshow">
+    <img id="slideshow-image" src="imagem1.jpeg" alt="imagem">
+</div>
+
+</div><div class="hearts" id="hearts"></div>
+<div class="balloons" id="balloons"></div><footer>
+    By Matheus em 15/07/2025
+</footer><script>
+    const images = ['imagem1.jpeg', 'imagem2.jpeg', 'imagem3.jpeg', 'imagem5.jpeg', 'animacao1.gif', 'imagem6.jpeg'];
+    let index = 0;
+    let intervalId;
+
+    function showImage() {
+        document.getElementById('slideshow-image').src = images[index];
+
+        clearTimeout(intervalId);
+
+        const isGif = images[index].toLowerCase().endsWith('.gif');
+        const duration = isGif ? 4000 : 3000;
+
+        intervalId = setTimeout(nextImage, duration);
+    }
+
+    function nextImage() {
+        index = (index + 1) % images.length;
+        showImage();
+    }
+
+    function prevImage() {
+        index = (index - 1 + images.length) % images.length;
+        showImage();
+    }
+
+    showImage();
+
+    function createHeart() {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.textContent = '❤';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+        document.getElementById('hearts').appendChild(heart);
+
+        setTimeout(() => heart.remove(), 6000);
+    }
+
+    function createBalloon() {
+        const balloon = document.createElement('div');
+        balloon.classList.add('balloon');
+        const balloons = ['🎈', '🎊', '✨', '🎉', '🎈'];
+        balloon.textContent = balloons[Math.floor(Math.random() * balloons.length)];
+        balloon.style.left = Math.random() * 100 + 'vw';
+        balloon.style.animationDuration = (Math.random() * 4 + 4) + 's';
+        document.getElementById('balloons').appendChild(balloon);
+
+        setTimeout(() => balloon.remove(), 6000);
+    }
+
+    setInterval(createHeart, 300);
+    setInterval(createBalloon, 500);
+</script></body>
+</html>
